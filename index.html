@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>English Learning System · 全自动英语互动学习系统</title>
+
+<!-- PWA -->
+<meta name="theme-color" content="#4f6ef7" />
+<link rel="manifest" href="./manifest.json" />
+<link rel="icon" type="image/png" href="./assets/icons/favicon-32.png" />
+
+<!-- iOS 添加到主屏幕 -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="英语学习" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<link rel="apple-touch-icon" href="./assets/icons/icon-180.png" />
+<meta name="format-detection" content="telephone=no" />
+
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<div id="app" class="app">
+
+  <!-- ============ 顶栏 ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">EN</span>
+      <div>
+        <h1>全自动英语互动学习系统</h1>
+        <p class="sub">Reading · Speaking · Story · Vocabulary</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="badge" id="badge-level">B1-B2</span>
+      <span class="badge badge-warn" id="badge-mode">Mock 模式</span>
+      <button class="btn btn-ghost" id="btn-settings">设置</button>
+    </div>
+  </header>
+
+  <!-- ============ 主体 ============ -->
+  <div class="layout">
+
+    <!-- 侧栏 -->
+    <nav class="sidebar">
+      <ul class="nav" id="nav">
+        <li data-tab="today" class="active"><span class="ic">📅</span>今日计划</li>
+        <li data-tab="reading"><span class="ic">📰</span>分级阅读</li>
+        <li data-tab="speaking"><span class="ic">🎙️</span>口语陪练</li>
+        <li data-tab="story"><span class="ic">🎬</span>互动故事</li>
+        <li data-tab="vocab"><span class="ic">📚</span>生词复习</li>
+        <li data-tab="dash"><span class="ic">📈</span>学习看板</li>
+      </ul>
+
+      <div class="side-block">
+        <div class="side-title">快捷指令</div>
+        <div class="cmd-chips" id="cmd-chips"></div>
+      </div>
+
+      <div class="side-block">
+        <div class="side-title">今日进度</div>
+        <div class="progress-mini" id="progress-mini"></div>
+      </div>
+    </nav>
+
+    <!-- 内容区 -->
+    <main class="content" id="content">
+      <!-- 今日 -->
+      <section class="tab-pane" data-pane="today"></section>
+      <!-- 阅读 -->
+      <section class="tab-pane hidden" data-pane="reading"></section>
+      <!-- 口语 -->
+      <section class="tab-pane hidden" data-pane="speaking"></section>
+      <!-- 故事 -->
+      <section class="tab-pane hidden" data-pane="story"></section>
+      <!-- 词库 -->
+      <section class="tab-pane hidden" data-pane="vocab"></section>
+      <!-- 看板 -->
+      <section class="tab-pane hidden" data-pane="dash"></section>
+    </main>
+  </div>
+
+  <!-- ============ 底部指令条 ============ -->
+  <footer class="cmdbar">
+    <div class="cmdbar-inner">
+      <input id="cmd-input" type="text" autocomplete="off"
+             placeholder="输入指令（换题 / 更难 / 更简单 / 开始口语 / 开始故事 / 复习 / 查看今日计划 / 继续故事），或直接输入英文回答…" />
+      <button class="btn btn-primary" id="cmd-send">发送</button>
+    </div>
+  </footer>
+
+  <!-- ============ 设置抽屉 ============ -->
+  <div class="drawer-mask hidden" id="drawer-mask"></div>
+  <aside class="drawer hidden" id="drawer">
+    <div class="drawer-head">
+      <h2>设置</h2>
+      <button class="btn btn-ghost" id="drawer-close">关闭</button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+  </aside>
+
+  <!-- ============ Toast ============ -->
+  <div class="toast-wrap" id="toast-wrap"></div>
+  <div class="loading-mask hidden" id="loading-mask"><div class="spinner"></div><p id="loading-text">生成中…</p></div>
+
+  <!-- ============ PWA 安装提示条 ============ -->
+  <div class="install-banner hidden" id="install-banner">
+    <span class="ib-text">安装到手机桌面，像 App 一样使用</span>
+    <button class="btn btn-primary btn-sm" id="install-btn">安装</button>
+    <button class="btn btn-ghost btn-sm" id="install-dismiss">×</button>
+  </div>
+</div>
+
+<script src="src/store.js"></script>
+<script src="src/srs.js"></script>
+<script src="src/prompts.js"></script>
+<script src="src/ai.js"></script>
+<script src="src/services.js"></script>
+<script src="src/commands.js"></script>
+<script src="src/ui.js"></script>
+<script src="src/app.js"></script>
+</body>
+</html>
